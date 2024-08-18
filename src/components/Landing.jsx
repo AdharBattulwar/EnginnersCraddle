@@ -45,18 +45,21 @@ const Landing = () => {
     fetchUser();
   }, []);
 
-  const handleSearch = (event) => {
-    const query = event.target.value.toLowerCase();
-    setSearchTerm(query);
-    if (query === "") {
+  // Fetch products whenever the searchTerm changes
+  useEffect(() => {
+    if (searchTerm === "") {
       setFilteredProducts(products);
     } else {
       setFilteredProducts(
         products.filter((product) =>
-          product.title.toLowerCase().includes(query)
+          product.title.toLowerCase().includes(searchTerm)
         )
       );
     }
+  }, [searchTerm, products]);
+
+  const handleSearch = (event) => {
+    setSearchTerm(event.target.value.toLowerCase());
   };
 
   return (

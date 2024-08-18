@@ -20,7 +20,6 @@ function Registration() {
             const result = response.data.data.result
             console.log(result);
             if(result==="OK"){
-                console.log("Ram Ram")
                 navigate('/login')
             }
             else{
