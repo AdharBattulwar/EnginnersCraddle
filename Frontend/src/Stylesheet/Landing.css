@@ -1,0 +1,40 @@
+*{
+    height: 100%;
+    width: 100%;
+}
+
+.swiper {
+    width: 100%;
+    height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .swiper-slide {
+    position: relative;
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+    height: calc((100% - 30px) / 2) !important;
+  
+    /* Center slide text vertically */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .swiper-pagination{
+    height: 1rem;
+    margin-top: 2rem;
+  }
+  .priceTag{
+    height: fit-content;
+    width: fit-content;
+    position: absolute;
+    right: 1%;
+    transform: rotate(-45deg);
+  }
+  img{
+    object-position: center;
+    object-fit: contain;
+    height: 10%;
+  }
