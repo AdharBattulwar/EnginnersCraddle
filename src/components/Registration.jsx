@@ -18,7 +18,6 @@ function Registration() {
         axios.post('https://intern-task-api.bravo68web.workers.dev/auth/signup', Data)
           .then(function (response) {
             const result = response.data.data.result
-            console.log(result);
             if(result==="OK"){
                 navigate('/login')
             }

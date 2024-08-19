@@ -1,37 +1,39 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import axiosInstance from "../client";
-
+// import axiosInstance from "../client";
+import { useCookies } from 'react-cookie';
 
 const Login = () => {
-    
-    const navigate = useNavigate();
+  const navigate = useNavigate();
+  const [cookies, setCookie] = useCookies(['token']);
 
-    const handleSubmit = async(e) =>{
-         const formData = new FormData(e.target);
-        // console.log(formData.get("Email"))
-        const email = formData.get("Email")
-        const Password = formData.get("Password")
-        localStorage.setItem("Email",email)
-        const Data = {
-            email:email,
-            password:Password
+  const handleSubmit = async (e) => {
+    const formData = new FormData(e.target);
+    const email = formData.get("Email");
+    const Password = formData.get("Password");
+    const Data = {
+      email: email,
+      password: Password,
+    };
+
+    axios.post("https://intern-task-api.bravo68web.workers.dev/auth/login", Data)
+      .then(function (response) {
+        if(response.data.error){
+          window.alert("Invalid Credentials")
         }
-
-        axiosInstance.post('https://intern-task-api.bravo68web.workers.dev/auth/login', Data)
-          .then(function (response) {
-            const token = response.data.token
-            localStorage.setItem("token", token)
-            console.log(response.data.token);
-            navigate('/landing')
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
-        e.preventDefault();
-      
-    }
+        else{
+          const token = response.data.token;
+          setCookie('token', token);
+          navigate(`/landing`);
+        }
+      })
+      .catch(function (error) {
+        setError("Login failed. Please check your credentials.");
+        console.error(error);
+      });
+    e.preventDefault();
+  };
 
   return (
     <div className="w-full h-auto flex justify-center align-center pt-16">
@@ -49,7 +51,6 @@ const Login = () => {
               type="email"
               className="rounded-md outline-none px-4 py-2 border-2 border-gray-200 hover:bg-gray-200"
               name="Email"
-              
               required
               placeholder="Email Address"
             />

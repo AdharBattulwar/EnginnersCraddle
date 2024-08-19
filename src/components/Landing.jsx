@@ -1,17 +1,26 @@
 import React, { useEffect, useState } from "react";
-import axiosInstance from "../client";
+import axios from "axios";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Grid, Pagination } from "swiper/modules";
 import "../Stylesheet/Landing.css";
 import "swiper/css";
 import "swiper/css/grid";
 import "swiper/css/pagination";
+import { useCookies } from 'react-cookie';
+
 
 const Landing = () => {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [user, setUser] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
+  const [cookies, setCookie] = useCookies(['token']);
+
+  const axiosInstance = axios.create({
+    baseURL: 'https://intern-task-api.bravo68web.workers.dev/api/',
+    timeout: 1000,
+    headers: {'Authorization': `Bearer ${cookies.token}`}
+  });
 
   // Fetch products from the API
   const fetchProducts = async () => {
@@ -28,16 +37,16 @@ const Landing = () => {
 
   // Fetch user information
   const fetchUser = async () => {
-    try {
-      const response = await axiosInstance.get(
+      await axiosInstance.get(
         "https://intern-task-api.bravo68web.workers.dev/api/me"
-      );
-      const userName = response.data.user.sub.split("@")[0];
-      setUser(userName);
-    } catch (error) {
-      console.log("Error fetching user:", error);
-    }
-  };
+      ).then((response)=>{
+        const userName = response.data.user.sub.split("@")[0];
+        setUser(userName);
+      })
+      .catch((error=>{
+        console.log(error)
+      }))
+    } ;
 
   // Fetch data on component mount
   useEffect(() => {
