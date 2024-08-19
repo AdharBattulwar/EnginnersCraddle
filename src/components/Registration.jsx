@@ -1,6 +1,6 @@
 import axios from "axios";
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../Stylesheet/Registration.css"
 
 function Registration() {
@@ -60,14 +60,14 @@ function Registration() {
               <input
                 type="submit"
                 value="Sign Up"
-                className="relative h-10 px-4 py-2 bg-gray-100 rounded-xl w-1/2 hover:bg-gray-200 hover:border-blue-200"
+                className="relative h-10 px-4 py-2 bg-[#779341] rounded-xl w-1/2 hover:bg-[#789341c2] hover:border-blue-200"
               />
             </div>
             <div className="realtive h-auto w-full flex items-center justify-center mt-20">
               Already Have An Account?
-              <a href="/login" className="w-1/2 flex items-center justify-center text-blue-800 font-bold">
+              <Link to="/login" className="w-1/2 flex items-center justify-center text-blue-800 font-bold">
                 &nbsp;Sign In
-              </a>
+              </Link>
             </div>
           </form>
         </div>

@@ -66,7 +66,7 @@ const Login = () => {
               <input
                 type="submit"
                 value="Login"
-                className="h-10 px-4 py-2 bg-blue-500 text-white rounded-xl w-1/2 hover:border-blue-200"
+                className="h-10 px-4 py-2 bg-[#779341] text-white rounded-xl w-1/2 hover:border-blue-200"
               />
             </div>
             <div className="relative h-auto mt-8 flex justify-between">
@@ -77,12 +77,12 @@ const Login = () => {
                 </Link>
               </div>
               <div className="w-1/2">
-                <a
-                  href="/forgotPassword"
+                <Link
+                  to="/"
                   className="flex justify-center items-center text-gray-400 font-bold hover:text-gray-600"
                 >
                   &nbsp;Forgot Password!
-                </a>
+                </Link>
               </div>
             </div>
           </form>
